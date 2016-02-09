@@ -1,15 +1,8 @@
 <% if HelpItems %>
-	<% require css(sapphire/thirdparty/jquery-ui-themes/base/jquery.ui.all.css) %>
-	<% require css(inlinehelp/css/ss.inlinehelp.css) %>
 
-	<% require javascript(sapphire/thirdparty/jquery/jquery.js) %>
-	<% require javascript(sapphire/thirdparty/jquery-ui/jquery-ui-1.8rc3.custom.js) %>
-	<% require javascript(sapphire/thirdparty/jquery-livequery/jquery.livequery.js) %>
-	<% require javascript(inlinehelp/javascript/ss.inlinehelp.js) %>
-
-(function($) {
-	<% control HelpItems %>
-		$('$DOMPattern').livequery(function() { $(this).inlineHelp({
+var SS_InlineHelpItems = {
+	<% loop $HelpItems %>
+		'$DOMPattern' : {
 			<% if IconHTML %>icon: '$IconHTML.JS',<% end_if %>
 			<% if IconMy && IconAt %>
 			iconPosition: {
@@ -34,8 +27,18 @@
 			title: '$Title.JS',
 			text: '$Text.JS',
 			link: '$Link.JS',
-			showOn: '$ShowTooltip.Lower.JS'
-		}); });
-	<% end_control %>
-})(jQuery);
+			showOn: '$ShowTooltip.Lower.JS',
+			attachWith: '$DOMMethod.JS'
+		}
+		<% if not $Last %>
+		,
+		<% end_if %>
+	<% end_loop %>
+}
+
+$(document).ready(function() {
+	$.each(SS_InlineHelpItems, function(k,v) {
+		var widget = $(k).inlineHelp(v);
+	});
+});
 <% end_if %>

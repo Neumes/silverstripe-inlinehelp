@@ -1,53 +1,45 @@
 ;(function($) {
-	Behaviour.register({
-		'#AttachType': {
-			initialize: function() {
-				$(this).find(':checked').change();
-			}
-		},
-		'#DisplayType': {
-			initialize: function() {
-				$(this).find(':checked').change();
-			}
-		}
+	$(document).on('ready', function() {
+		$('#AttachType').find(':checked').change();
+		$('#DisplayType').find(':checked').change();
 	});
 
-	$('#AttachType :radio').live('change', function() {
+	$('#AttachType :radio').on('change', function() {
 		switch ($(this).val()) {
 			case 'All':
-				$('#ParentFilterID').hide();
-				$('#Pages').hide();
-				$('#AttachPageType').hide();
+				$('#Form_ItemEditForm_ParentFilterID_Holder').hide();
+				$('#Form_ItemEditForm_Pages_Holder').hide();
+				$('#Form_ItemEditForm_AttachPageType_Holder').hide();
 				break;
 
 			case 'Pages':
-				$('#ParentFilterID').hide();
-				$('#Pages').show();
-				$('#AttachPageType').hide();
+				$('#Form_ItemEditForm_ParentFilterID_Holder').hide();
+				$('#Form_ItemEditForm_Pages_Holder').show();
+				$('#Form_ItemEditForm_AttachPageType_Holder').hide();
 				break;
 
 			case 'Children':
-				$('#ParentFilterID').show();
-				$('#Pages').hide();
-				$('#AttachPageType').hide();
+				$('#Form_ItemEditForm_ParentFilterID_Holder').show();
+				$('#Form_ItemEditForm_Pages_Holder').hide();
+				$('#Form_ItemEditForm_AttachPageType_Holder').hide();
 				break;
 
 			case 'Type':
-				$('#ParentFilterID').hide();
-				$('#Pages').hide();
-				$('#AttachPageType').show();
+				$('#Form_ItemEditForm_ParentFilterID_Holder').hide();
+				$('#Form_ItemEditForm_Pages_Holder').hide();
+				$('#Form_ItemEditForm_AttachPageType_Holder').show();
 				break;
 		}
 	});
 
-	$('#DisplayType :radio').live('change', function() {
+	$('#DisplayType :radio').on('change', function() {
 		switch ($(this).val()) {
 			case 'Tooltip':
-				$('#Text.htmleditor').show();
+				$('#Form_ItemEditForm_Text.htmleditor').show();
 				break;
 
 			case 'Link':
-				$('#Text.htmleditor').hide();
+				$('#Form_ItemEditForm_Text.htmleditor').hide();
 				break;
 		}
 	});

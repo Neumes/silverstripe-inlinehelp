@@ -26,19 +26,77 @@
 				height: 'auto'
 			},
 			showOn: 'hover',
-			tooltipDelay: 200
+			tooltipDelay: 200,
+			attachWith: 'appendTo'
 		},
 		_init: function() {
 			var widget = this;
+			var currentDim = {
+				position: null,
+				width: null
+			};
+			var updateInterval = null;
+			
+			function attachToDom(){
+				var method = widget.options.attachWith;
+				if (typeof widget.icon[method] == 'function') {
+					widget.icon[method].call(widget.icon, widget.element)
+				}
+			}
 
 			var updatePosition = function () {
-				widget.icon.position($.extend(widget.options.iconPosition, {
-					of: widget.element
-				}));
+				var cur = currentDim;
+					var elem = widget;
+					
+				if (!widget.element) {
+					clearInterval(updateInterval);
+					return;
+				}
+				if (!widget.element[0].parentElement) {
+					// node has been removed from the dom - lets remove the updateInterval,
+					// the window.scroll event will still trigger though. need to fix this leak 
+					// at some point!
+					clearInterval(updateInterval);
+					delete widget;
+					return;
+				}
+				try {
+					var newPos = widget.element.position();
+					var newWidth = widget.element.width();
+					
+					if (typeof(newPos) == 'undefined' || typeof(newWidth) == 'undefined') {
+						return;
+					}
+
+					if (typeof(currentDim) == 'undefined') {
+						currentDim = {
+							position: newPos,
+							width: newWidth
+						};
+						return;
+					}
+
+					if ((currentDim && currentDim.position && 
+						currentDim.position.top == newPos.top && 
+						currentDim.position.left == newPos.left) && 
+						currentDim.width == newWidth) {
+						return;
+					}
+
+					currentDim.position = newPos;
+					currentDim.width = newWidth;
+					if (widget && widget.icon) {
+						widget.icon.position($.extend(widget.options.iconPosition, {
+							of: widget.element
+						}));
+					}
+				} catch (e) {
+					// ignore errors
+				}
 			}
 
 			$(window).scroll(updatePosition);
-			var updateInterval = setInterval(updatePosition, 1000);
+			updateInterval = setInterval(updatePosition, 1000);
 
 			if (this.options.type == 'link') {
 				this.link = $('<a></a>')
@@ -51,21 +109,21 @@
 					.addClass('ss-inlinehelp-icon ui-state-default ui-corner-all')
 					.addClass('ss-inlinehelp-click')
 					.html(this.link)
-					.appendTo(document.body)
+					.appendTo(this.element.parent())
 					.position($.extend(this.options.iconPosition, {
 						of: this.element
 					}));
-
+				attachToDom();
 				return;
 			}
 
 			this.icon = $('<div></div>')
 				.addClass('ss-inlinehelp-icon ui-state-default ui-corner-all')
 				.html(this.options.icon)
-				.appendTo(document.body)
 				.position($.extend(this.options.iconPosition, {
 					of: this.element
 				}));
+			attachToDom();
 
 			this.tooltip = $('<div></div>')
 				.addClass('ss-inlinehelp-tooltip ui-widget ui-widget-content ui-corner-all')
@@ -115,6 +173,10 @@
 						widget.openTooltip();
 					}, function() {
 						widget.startTimeout();
+					}).click(function() {
+						widget.openTooltip();
+						widget.tooltip.addClass('ss-inlinehelp-hideonclick');
+						return false;
 					});
 				});
 			}

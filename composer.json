@@ -1,0 +1,26 @@
+{
+	"name": "neumes/silverstripe-inlinehelp",
+	"description": "",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "inline", "help"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Tom Brewer-Vinga",
+			"email": "tom@silverstripe.com.au"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/Neumes/silverstripe-inlinehelp/issues"
+	},
+	"require":
+	{
+		"silverstripe/cms": "3.*",
+		"silverstripe/framework": "3.*",
+		"composer/installers": "*"
+	},
+	"extra": {
+		"installer-name": "inlinehelp"
+	},
+	"minimum-stability": "dev"
+}

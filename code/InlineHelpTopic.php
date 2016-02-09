@@ -7,6 +7,13 @@
  */
 class InlineHelpTopic extends DataObject {
 
+	private static $attachment_method_map = array(
+		'appendTo' => 'Append to',
+		'prependTo' => 'Prepend to',
+		'insertBefore' => 'Insert before',
+		'insertAfter' => 'Insert after'
+	);
+
 	public static $db = array(
 		'Title'          => 'Varchar(100)',
 		'DisplayType'    => 'Enum("Tooltip, Link", "Tooltip")',
@@ -23,7 +30,8 @@ class InlineHelpTopic extends DataObject {
 		'IconAt'         => 'Varchar(15)',
 		'IconOffset'     => 'Varchar(10)',
 		'TooltipMy'      => 'Varchar(15)',
-		'TooltipAt'      => 'Varchar(15)'
+		'TooltipAt'      => 'Varchar(15)',
+		'DOMMethod'		 => 'Enum("appendTo, prependTo, insertBefore, insertAfter", "appendTo")'
 	);
 
 	public static $has_one = array(
@@ -65,7 +73,7 @@ class InlineHelpTopic extends DataObject {
 			case 'All':
 				return 'All pages';
 			case 'Pages':
-				return 'Specific pages: ' . implode(', ', $this->Pages()->map());
+				return 'Specific pages: ' . implode(', ', $this->Pages()->toArray());
 			case 'Children':
 				return 'Children of ' . $this->ParentFilter()->Title;
 			case 'Type':
@@ -80,7 +88,7 @@ class InlineHelpTopic extends DataObject {
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('inlinehelp/javascript/InlineHelpAdmin.js');
 
-		return new FieldSet(new TabSet('Root',
+		return new FieldList(new TabSet('Root',
 			new Tab('Main',
 				new HeaderField('HelpHeader', 'Help Topic'),
 				new TextField('Title', 'Title'),
@@ -88,7 +96,7 @@ class InlineHelpTopic extends DataObject {
 					'Tooltip' => 'Display help text and/or link in tooltip',
 					'Link'    => 'Click the icon to go to the help link'
 				)),
-				new HtmlEditorField('Text', 'Short help text', 8),
+				new HtmlEditorField('Text', 'Short help text'),
 				new TextField('Link', 'Help link')
 			),
 			new Tab('Subject',
@@ -97,7 +105,8 @@ class InlineHelpTopic extends DataObject {
 				new LiteralField('DOMPatternNote', '<p>This is a jQuery (CSS)
 				selector which specifies which elements to attach this help
 				topic to. The same topic can be attached to multiple elements.
-				</p>')
+				</p>'),
+				new DropdownField('DOMMethod', 'DOM attachment method', self::$attachment_method_map)
 			),
 			new Tab('AttachTo',
 				new HeaderField('AttachToHeader', 'Attach Help To'),

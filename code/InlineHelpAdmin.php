@@ -16,7 +16,8 @@ class InlineHelpAdmin extends ModelAdmin {
 
 	public function init() {
 		parent::init();
-		HtmlEditorConfig::set_active('simple');
+		// Commented out due to a bug with Editor init
+		//HtmlEditorConfig::set_active('helpsimple');
 	}
 
 }
