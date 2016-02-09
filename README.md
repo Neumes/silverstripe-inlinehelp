@@ -30,7 +30,8 @@ Installation Instructions
 
 1. Place this directory in the root of your SilverStripe installation.
 2. If cloned or using the zip file, change the directory to just `inlinehelp`
-3. Add the following lines of code to your Page init function ```
+3. Add the following lines of code to your Page init function
+```
 if($this->dataRecord) {
 	$this->dataRecord->extend('onPageInit', $this);
 } else {
