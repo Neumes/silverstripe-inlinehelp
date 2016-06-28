@@ -1,5 +1,5 @@
 .ss-inlinehelp-icon, .ss-inlinehelp-tooltip {
-	position: absolute;
+	position: absolute !important;
 	top: 0;
 }
 
