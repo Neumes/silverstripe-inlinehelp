@@ -3,7 +3,7 @@ SilverStripe Inline Help Module
 
 Maintainer Contacts
 -------------------
-*  Tom Brewer-Vinga (<andrew@silverstripe.com.au>)
+*  Tom Brewer-Vinga (<tom@silverstripe.com.au>)
 
 Requirements
 ------------
