@@ -1,5 +1,4 @@
 <% if HelpItems %>
-
 var SS_InlineHelpItems = {
 	<% loop $HelpItems %>
 		'$DOMPattern' : {
@@ -25,7 +24,7 @@ var SS_InlineHelpItems = {
 			<% end_if %>
 			type: '$DisplayType.Lower.JS',
 			title: '$Title.JS',
-			text: '$Text.JS',
+			content: '$Text.JS',
 			link: '$Link.JS',
 			showOn: '$ShowTooltip.Lower.JS',
 			attachWith: '$DOMMethod.JS'
@@ -35,10 +34,4 @@ var SS_InlineHelpItems = {
 		<% end_if %>
 	<% end_loop %>
 }
-
-$(document).ready(function() {
-	$.each(SS_InlineHelpItems, function(k,v) {
-		var widget = $(k).inlineHelp(v);
-	});
-});
 <% end_if %>
