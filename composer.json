@@ -1,5 +1,5 @@
 {
-	"name": "neumes/silverstripe-inlinehelp",
+	"name": "silverstripe-australia/inlinehelp",
 	"description": "",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "inline", "help"],
@@ -10,9 +10,6 @@
 			"email": "tom@silverstripe.com.au"
 		}
 	],
-	"support": {
-		"issues": "https://github.com/Neumes/silverstripe-inlinehelp/issues"
-	},
 	"require":
 	{
 		"silverstripe/cms": "3.*",
