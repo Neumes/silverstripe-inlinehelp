@@ -21,9 +21,7 @@ class InlineHelpTopic extends DataObject {
 		'Link'           => 'Varchar(100)',
 		'AttachType'     => 'Enum("All, Pages, Children, Type", "Pages")',
 		'AttachPageType' => 'Varchar(100)',
-		'DOMPattern'     => 'Varchar(100)',
-		'ShowTooltip'    => 'Enum("Hover, Click", "Hover")',
-		'DOMMethod'		 => 'Enum("appendTo, prependTo, insertBefore, insertAfter", "appendTo")'
+		'DOMPattern'     => 'Varchar(100)'
 	);
 
 	public static $has_one = array(
@@ -80,7 +78,7 @@ class InlineHelpTopic extends DataObject {
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('inlinehelp/javascript/InlineHelpAdmin.js');
 
-		return new FieldList(new TabSet('Root',
+		$fields = new FieldList(new TabSet('Root',
 			new Tab('Main',
 				new HeaderField('HelpHeader', 'Help Topic'),
 				new TextField('Title', 'Title'),
@@ -115,6 +113,10 @@ class InlineHelpTopic extends DataObject {
 				))
 			)
 		));
+
+		$this->extend('updateCMSFields', $fields);
+
+		return $fields;
 	}
 
 }

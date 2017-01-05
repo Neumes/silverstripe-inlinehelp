@@ -14,10 +14,12 @@ class InlineHelpExtension extends DataExtension {
 	 * Includes the required JS libraries and inline help definitions.
 	 */
 	public function onPageInit() {
-		$template = 'InlineHelp';
-		$include  = $this->owner->renderWith($template);
-		if ($include) Requirements::customScript($include);
-		Requirements::javascript(INLINEHELP_DIR . '/javascript/inlinehelp.bootstrap.popover.js');
+		if($this->owner->HelpItems) {
+			$include  = $this->owner->renderWith('InlineHelp');
+			if ($include) Requirements::customScript($include);
+			Requirements::javascript(INLINEHELP_DIR . '/javascript/inlinehelp.bootstrap.popover.js');
+		}
+
 	}
 
 	/**
