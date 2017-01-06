@@ -18,6 +18,7 @@ class InlineHelpExtension extends DataExtension {
 			$include  = $this->owner->renderWith('InlineHelp');
 			if ($include) Requirements::customScript($include);
 			Requirements::javascript(INLINEHELP_DIR . '/javascript/inlinehelp.bootstrap.popover.js');
+			Requirements::css(INLINEHELP_DIR . '/css/inlinehelpbootstrap.css');
 		}
 
 	}

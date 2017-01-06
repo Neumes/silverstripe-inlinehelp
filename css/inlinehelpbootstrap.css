@@ -1,0 +1,11 @@
+.btn-inlinehelp {
+	padding: 0.2em 0.3em 0;
+	border: none;
+	margin: 0.3em;
+	border-radius: 50%;
+}
+
+.btn-inlinehelp .glyphicon {
+	color: #0a7cb9;
+    font-size: 100%;
+}
