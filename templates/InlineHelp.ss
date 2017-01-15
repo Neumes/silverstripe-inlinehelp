@@ -9,7 +9,8 @@ var SS_InlineHelpItems = {
 			trigger: '$trigger',
 			<% if $container %>container: '$container',<% end_if %>
 			<% if $html %>html: '$html',<% end_if %>
-			placement: 'auto $placement'
+			placement: 'auto $placement',
+			container: 'body'
 		}<% if not $Last %>,<% end_if %>
 	<% end_loop %>
 }
