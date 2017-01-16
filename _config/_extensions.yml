@@ -1,6 +1,0 @@
-SiteTree:
-  extensions:
-    - InlineHelpExtension
-InlineHelpTopic:
-  extensions:
-    - InlineHelpTopicBootstrap
