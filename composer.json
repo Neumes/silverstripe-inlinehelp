@@ -1,5 +1,5 @@
 {
-	"name": "silverstripe-australia/inlinehelp",
+	"name": "symbiote-library/silverstripe-inlinehelp",
 	"description": "",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "inline", "help"],
@@ -17,7 +17,10 @@
 		"composer/installers": "*"
 	},
 	"extra": {
-		"installer-name": "inlinehelp"
+		"installer-name": "inlinehelp",
+		"branch-alias": {
+			"dev-master": "2.0.x-dev"
+		}
 	},
 	"minimum-stability": "dev"
 }
