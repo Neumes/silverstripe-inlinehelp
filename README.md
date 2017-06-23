@@ -7,7 +7,7 @@ SilverStripe Inline Help Module
 
 Maintainer Contacts
 -------------------
-*  Tom Brewer-Vinga (<tom@silverstripe.com.au>)
+*  Tom Brewer-Vinga (<tom@symbiote.com.au>)
 
 Requirements
 ------------
