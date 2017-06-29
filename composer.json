@@ -22,5 +22,8 @@
 			"dev-master": "2.0.x-dev"
 		}
 	},
+	"replace": {
+		"silverstripe-australia/inlinehelp": "self.version"
+	},
 	"minimum-stability": "dev"
 }
