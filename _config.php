@@ -3,6 +3,8 @@
  * @package silverstripe-inlinehelp
  */
 
+define('INLINEHELP_DIR', basename(dirname(__FILE__)));
+
 /**
  * Set up a simplified HTML editor config for use in help text.
  */
